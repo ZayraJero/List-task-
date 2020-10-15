@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Task = (props) => {
-    const { title, done, category } = props;
+    const { title, done, category, deleteTask, updateTask, id } = props;
 
     return (
         <div className="card mt-3">
@@ -9,8 +9,12 @@ const Task = (props) => {
             <div className="card-body">
                 <h5 className="card-title">{done}</h5>
                 <p className="card-text">{category}</p>
-                <button className="btn btn-primary">Completar</button>
-                <button className="btn btn-danger">Eliminar</button>
+                {
+                    done
+                        ? <button className="btn btn-secondary" onClick={() => { updateTask(category, title, false, id) }}>Deshacer</button>
+                        : <button className="btn btn-primary" onClick={() => { updateTask(category, title, true, id) }}>Completar</button>
+                }
+                <button onClick={() => { deleteTask(id) }} className="btn btn-danger">Eliminar</button>
             </div>
         </div>
     )
